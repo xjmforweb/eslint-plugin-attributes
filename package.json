@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-attributes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "html标签属性数量过多时需换行",
   "keywords": [
     "eslint",
@@ -23,5 +23,10 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "license": "ISC"
+  "license": "ISC",
+  ,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xjmforweb/eslint-plugin-attributes"
+  }
 }
