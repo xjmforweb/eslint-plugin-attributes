@@ -43,9 +43,9 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-* max-attributes html标签属性数量过多时需换行，可选参数max，表示最大允许数量，默认3
-
-
-
+Rule                              | Default                        | Options
+----                              | -----------                    | -------
+`max-attributes`                  | 2                              | max = 3
+`max-attribute-value-logical`     | 1                              | max = 2
 
 
