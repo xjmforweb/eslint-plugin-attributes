@@ -30,8 +30,17 @@ Add `attributes` to the plugins section of your `.eslintrc` configuration file. 
 }
 ```
 
+Use default by `extends` option
 
-Then configure the rules you want to use under the rules section.
+```json
+{
+    "extends": [
+        "plugin:attributes/base"
+    ]
+}
+```
+
+Or configure the rules you want to use under the rules section.
 
 ```json
 {
@@ -43,9 +52,9 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-Rule                              | Default                        | Options
-----                              | -----------                    | -------
-`max-attributes`                  | 2                              | max = 3
-`max-attribute-value-logical`     | 1                              | max = 2
+Rule                              | Default                        | Options      | Description    
+----                              | -----------                    | -------      | -------   
+`max-attributes`                  | 2                              | max = 3      | html标签属性数量过多时需换行
+`max-attribute-value-logical`     | 1                              | max = 2      | 属性上逻辑操作符出现的次数限制
 
 
