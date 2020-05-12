@@ -52,9 +52,9 @@ Or configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-Rule                              | Default                        | Options      | Description    
-----                              | -----------                    | -------      | -------   
-`max-attributes`                  | 2                              | max = 3      | html标签属性数量过多时需换行,支持自动修复,若属性过少换行也会自动修复为一行
-`max-attribute-value-logical`     | 1                              | max = 2      | 属性上逻辑操作符出现的次数限制
+Rule                              | Default       | Options              | Description    
+----                              | -----------   | -------              | -------   
+`max-attributes`                  | 2             | `[2, { max: 3, attrStrLimit: 50 }]`      | html标签属性数量过多时需换行，支持自动修复。若属性过少换行也会自动修复为一行。单个属性长度超出attrStrLimit时，即使属性较少也要换行。
+`max-attribute-value-logical`     | 1             | `[1, { max: 2 }]`      | 属性上逻辑操作符出现的次数限制
 
 
