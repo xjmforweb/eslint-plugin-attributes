@@ -8,32 +8,155 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require("../../../lib/rules/max-attributes"),
-
-    RuleTester = require("eslint").RuleTester;
-
-
+var rule = require("../../../lib/rules/max-attributes")
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester({
+    parser: require.resolve('vue-eslint-parser'),
+    parserOptions: { ecmaVersion: 2015 }
+})
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
 ruleTester.run("max-attributes", rule, {
 
     valid: [
         {
-            code: ``
+            filename: 'test.vue',
+            code: ''
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" slot-scope="{ data }" my-prop="prop"></custom>
+                 </template>`,
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom
+                         data-id="foo"
+                          slot-scope="{ data }"
+                           my-prop="prop"></custom>
+                 </template>`,
+            options: [{max: 1}]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 3}]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom
+                         data-id="foo"
+                         a="1"
+                         v="2"
+                         ></custom>
+                 </template>`,
+            options: [{attrStrLimit: 3, max: 2}]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 2}]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" a="1"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 14}]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom
+                         data-id="foo"
+                          a="1"
+                          a="asdasdsadsadadasdsadsadsadasdasdasd"
+                          a="1"
+                          a="1"
+                          a="1"
+                          ></custom>
+                 </template>`,
+            options: [{attrStrLimit: 14}]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" a="1" a="1" a="1" a="1" a="1"></custom>
+                 </template>`,
+            options: [{max: 6}]
         }
         // give me some code that won't trigger a warning
     ],
 
     invalid: [
         {
-            code: "...",
+            code: `<template>
+                        <custom data-id="foo" a="1"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 4}],
             errors: [{
-                message: "Fill me in.",
-                type: "Me too"
+                type: "VElement"
             }]
-        }
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" a="1" a="1" a="1" a="1" a="1"></custom>
+                 </template>`,
+            options: [{max: 5}],
+            errors: [{
+                type: "VElement"
+            }]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" a="1" a="1" a="1" a="1" a="1"></custom>
+                 </template>`,
+            errors: [{
+                type: "VElement"
+            }]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" a="1" v="2"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 3, max: 2}],
+            errors: [{
+                type: "VElement"
+            }]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom data-id="foo" a="1"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 3, max: 2}],
+            errors: [{
+                type: "VElement"
+            }]
+        },
+        {
+            filename: 'test.vue',
+            code: `<template>
+                        <custom
+                         data-id="foo"
+                          a="1"></custom>
+                 </template>`,
+            options: [{attrStrLimit: 15, max: 2}],
+            errors: [{
+                type: "VElement"
+            }]
+        },
     ]
 });
