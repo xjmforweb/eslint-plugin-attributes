@@ -101,6 +101,39 @@ ruleTester.run("max-attributes", rule, {
         {
             code:
                 `<template>
+                   <img data-id="foo" a="1" a="1"/>234
+                </template>`,
+            output:
+                `<template>
+                   <img
+                     data-id="foo"
+                     a="1"
+                     a="1"/>234
+                </template>`,
+            options: [{max: 2}],
+            errors: [{
+                type: "VElement"
+            }]
+        },
+        {
+            code:
+                `<template>
+                   <img data-id="foo" a="1">
+                </template>`,
+            output:
+                `<template>
+                   <img
+                     data-id="foo"
+                     a="1">
+                </template>`,
+            options: [{attrStrLimit: 2}],
+            errors: [{
+                type: "VElement"
+            }]
+        },
+        {
+            code:
+                `<template>
                    <custom data-id="foo" a="1" b="1" c="1"></custom>
                 </template>`,
             output:

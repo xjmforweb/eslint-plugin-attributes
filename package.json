@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-attributes",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "description": "html标签属性的一些lint",
   "keywords": [
     "eslint",
